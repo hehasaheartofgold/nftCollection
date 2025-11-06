@@ -1,0 +1,64 @@
+@font-face {
+  font-family: 'MinGothic';
+  src: url(fonts/MinGothic-Regular.otf) format('opentype');
+}
+
+@font-face {
+  font-family: 'AGsuper';
+  src: url(fonts/AGSuperBlackGothic.otf) format('opentype');
+}
+
+html, body {
+  font-family: 'MinGothic';
+  height: 100%;
+  margin: 0;
+  background: black;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 12px 0;
+  text-align: center;
+}
+
+.video {
+  flex: 1;
+  display: flex;
+  justify-content: center;   /* 캔버스 가로 중앙 */
+  align-items: center;       /* 캔버스 세로 중앙 */
+  position: relative;
+}
+
+canvas {
+  display: block;
+}
+
+/* ✅ NFT 교체 버튼 아래 중앙 고정 */
+#changeBtn {
+  position: absolute;
+  bottom: 60px;               /* 화면 하단에서 30px 띄움 */
+  left: 50%;                  /* 중앙 기준 */
+  transform: translateX(-50%); /* 정확히 가운데로 이동 */
+  padding: 10px 20px;
+  background: yellow;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+#changeBtn:hover {
+  background: #333;
+}
+
+#title{
+  color: yellow;
+  position: absolute;
+  top: 30px;               /* 화면 하단에서 30px 띄움 */
+  left: 50%;                  /* 중앙 기준 */
+  transform: translateX(-50%); /* 정확히 가운데로 이동 */
+  padding: 10px 20px;
+}
