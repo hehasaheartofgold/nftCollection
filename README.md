@@ -1,2 +1,1 @@
-# NFT-
-안녕하세요
+Woosung NFT Collection
