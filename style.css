@@ -37,7 +37,7 @@ canvas {
 /* ✅ NFT 교체 버튼 아래 중앙 고정 */
 #changeBtn {
   position: absolute;
-  bottom: 60px;               /* 화면 하단에서 30px 띄움 */
+  bottom: 80px;               /* 텍스트 위에 충분한 간격 */
   left: 50%;                  /* 중앙 기준 */
   transform: translateX(-50%); /* 정확히 가운데로 이동 */
   padding: 10px 20px;
@@ -48,10 +48,27 @@ canvas {
   cursor: pointer;
   font-family: monospace;
   font-size: 14px;
+  z-index: 10;                /* 텍스트 위에 표시 */
 }
 
 #changeBtn:hover {
   background: #333;
+}
+
+#nftInfo {
+  color: white;
+  position: absolute;
+  bottom: 20px;               /* 화면 하단에서 20px 띄움 */
+  left: 50%;                  /* 중앙 기준 */
+  transform: translateX(-50%); /* 정확히 가운데로 이동 */
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+  padding: 10px 20px;
+  max-width: 80%;
+  word-wrap: break-word;
+  z-index: 1;                 /* 버튼 아래에 표시 */
 }
 
 #title{

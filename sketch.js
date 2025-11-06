@@ -5,6 +5,7 @@ let video,
 let nftImg;
 let loading = true;
 let videoError = false;
+let currentNFTMetadata = null; // 현재 NFT 메타데이터 저장
 
 let changeBtn;
 let isLoading = false; // 버튼 중복 클릭 방지용
@@ -135,6 +136,27 @@ function drawLabel(x, y, msg) {
   fill(255);
   text(msg, x, y);
 }
+// ✅ NFT 정보를 HTML에 표시하는 함수
+function updateNFTInfo(metadata) {
+  const nftInfoEl = document.getElementById('nftInfo');
+  if (!nftInfoEl) return;
+
+  const name = metadata.name || metadata.title || 'Unknown NFT';
+  const description = metadata.description || '';
+  const creator = metadata.creators?.[0] || metadata.artist || '';
+  
+  let infoText = name;
+  if (description) {
+    infoText += ` - ${description}`;
+  }
+  if (creator) {
+    infoText += ` (by ${creator})`;
+  }
+
+  nftInfoEl.textContent = infoText;
+  currentNFTMetadata = metadata;
+}
+
 async function loadRandomNFT() {
   loading = true;
   try {
@@ -146,6 +168,9 @@ async function loadRandomNFT() {
     if (!withMeta.length) throw new Error("No NFTs with metadata");
     const pick = withMeta[Math.floor(Math.random() * withMeta.length)];
     const md = pick.token.metadata;
+
+    // ✅ NFT 메타데이터 저장
+    currentNFTMetadata = md;
 
     let media =
       md.artifactUri ||
@@ -172,6 +197,8 @@ async function loadRandomNFT() {
         (img) => {
           nftImg = img;
           loading = false;
+          // ✅ 이미지 로드 완료 후 NFT 정보 업데이트
+          updateNFTInfo(md);
           resolve(img);
         },
         (err) => {
@@ -184,6 +211,11 @@ async function loadRandomNFT() {
   } catch (e) {
     console.error("NFT 로드 실패:", e);
     loading = false;
+    // ✅ 에러 시에도 정보 업데이트 시도
+    const nftInfoEl = document.getElementById('nftInfo');
+    if (nftInfoEl) {
+      nftInfoEl.textContent = 'NFT 로드 실패';
+    }
     throw e; // Promise.reject 대신 throw 사용
   }
 }
